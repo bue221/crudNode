@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto con node</title>
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- javascript bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-md">
+        <a class="navbar-brand" href="#">App vacanita con node</a>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <!-- FORM -->
+        <div class="col-md-5">
+          <form action="/add" method="POST">
+            <h1>Crear tarea:</h1>
+            <div class="mb-3">
+              <label for="titulo" class="form-label">titulo de la tarea</label>
+              <input
+                type="text"
+                class="form-control"
+                id="titulo"
+                name="titulo"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="descripcion" class="form-label"
+                >Descripción de la tarea</label
+              >
+              <textarea
+                class="form-control"
+                id="descripcion"
+                name="descripcion"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <button type="submit" class="btn btn-success">Crear nota</button>
+            </div>
+          </form>
+        </div>
+        <!-- Lista -->
+        <div class="col-md-7 mt-3">
+          <table class="table table-dark table-hover">
+            <thead>
+              <tr>
+                <th>N°</th>
+                <th>titulo</th>
+                <th>Descripción</th>
+                <th>Operación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(let i = 0; i < tasks.length; i++) { %>
+              <tr>
+                <th scope="row"><%= i + 1 %></th>
+                <td><%= tasks[i]?.title %></td>
+                <td><%= tasks[i]?.description %></td>
+                <td>
+                  <a
+                    href="/done/<%= tasks[i]._id %>"
+                    class="
+                      btn
+                      <%=
+                      !tasks[i].status
+                      ?
+                      'btn-success'
+                      :
+                      'btn-danger'
+                      %>
+                    "
+                    ><%= !tasks[i].status ? 'Hecha' : 'No hecha' %></a
+                  >
+                  <a href="/delete/<%= tasks[i]._id %>" class="btn btn-danger"
+                    >Eliminar</a
+                  >
+                  <a href="/edit/<%= tasks[i]._id %>" class="btn btn-info"
+                    >Editar</a
+                  >
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
