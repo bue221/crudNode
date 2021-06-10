@@ -6,12 +6,24 @@ const mongoose = require("mongoose");
 // imports routes
 const indexRoutes = require("./routes/index");
 
-// connnection to db
+// connnection to db local
+// mongoose
+//   .connect("mongodb://localhost/crudNotes", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then((res) => console.log("Conexion exitosa a la base de datos"))
+//   .catch((err) => console.log("@db", err));
+
+//conection to db service web
 mongoose
-  .connect("mongodb://localhost/crudNotes", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://db_user:GHmn798@cluster0.zmpzx.mongodb.net/crudNotes?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then((res) => console.log("Conexion exitosa a la base de datos"))
   .catch((err) => console.log("@db", err));
 

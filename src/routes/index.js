@@ -3,6 +3,10 @@ const router = express.Router();
 const Task = require("../models/task");
 
 // vistas
+router.get("/", (req, res) => {
+  res.redirect("/home");
+});
+
 router.get("/edit/:id", async (req, res) => {
   try {
     const { id } = req.params;
